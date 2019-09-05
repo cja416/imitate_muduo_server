@@ -80,13 +80,6 @@ LogStream& LogStream::operator<<(unsigned int v)
 	return *this;
 }
 
-
-LogStream& LogStream::operator<<(unsigned int v)
-{
-	formatInteger(v);
-	return *this;
-}
-
 LogStream& LogStream::operator<<(long v)
 {
 	formatInteger(v);
@@ -110,7 +103,21 @@ LogStream& LogStream::operator<<(unsigned long long v)
 	formatInteger(v);
 	return *this;
 }
-
+/*
+LogStream& LogStream::operator<<(const void* p)
+{
+	uintptr_t v = reinterpret_cast<uintptr_t>(p);
+	if (buffer_.avail() >= kMaxNumericSize)
+	    {
+	          char* buf = buffer_.current();
+		  buf[0] = '0';
+		  buf[1] = 'x';
+		  size_t len = convertHex(buf+2, v);
+		  buffer_.add(len+2);
+	    }
+	return *this;
+}
+*/
 LogStream& LogStream::operator<<(double v) {			//前面都是可转为整数，double型的要再写
 	if (buffer_.avail() >= kMaxNumericSize) {
 		int len = snprintf(buffer_.current(), kMaxNumericSize, "%.12g", v);

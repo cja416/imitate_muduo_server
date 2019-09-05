@@ -97,7 +97,7 @@ void EventLoop::loop() {
 	assert(isInLoopThread());	//确保eventloop已绑定线程
 	looping_ = true;
 	quit_ = false;
-	LOG << "EventLoop " << this << " start looping";
+	//LOG << "EventLoop " << this << " start looping";
 	std::vector<SP_Channel> ret;		//SP即shared_ptr
 	while (!quit_) {					//不断循环取出eventloop中epoll获得的事件
 		//cout << "doing" << endl;
