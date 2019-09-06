@@ -598,29 +598,7 @@ hello
 AnalysisState HttpData::analysisRequest()
 {
 	if (method_ == METHOD_POST)
-	{
-		// ------------------------------------------------------
-		// My CV stitching handler which requires OpenCV library
-		// ------------------------------------------------------
-		// string header;
-		// header += string("HTTP/1.1 200 OK\r\n");
-		// if(headers_.find("Connection") != headers_.end() && headers_["Connection"] == "Keep-Alive")
-		// {
-		//     keepAlive_ = true;
-		//     header += string("Connection: Keep-Alive\r\n") + "Keep-Alive: timeout=" + to_string(DEFAULT_KEEP_ALIVE_TIME) + "\r\n";
-		// }
-		// int length = stoi(headers_["Content-length"]);
-		// vector<char> data(inBuffer_.begin(), inBuffer_.begin() + length);
-		// Mat src = imdecode(data, CV_LOAD_IMAGE_ANYDEPTH|CV_LOAD_IMAGE_ANYCOLOR);
-		// //imwrite("receive.bmp", src);
-		// Mat res = stitch(src);
-		// vector<uchar> data_encode;
-		// imencode(".png", res, data_encode);
-		// header += string("Content-length: ") + to_string(data_encode.size()) + "\r\n\r\n";
-		// outBuffer_ += header + string(data_encode.begin(), data_encode.end());
-		// inBuffer_ = inBuffer_.substr(length);
-		// return ANALYSIS_SUCCESS;
-	}
+	{}
 	else if (method_ == METHOD_GET || method_ == METHOD_HEAD) {
 		string header;
 		header += "HTTP/1.1 200 OK\r\n";
@@ -655,7 +633,7 @@ AnalysisState HttpData::analysisRequest()
 		}
 
 		struct stat sbuf;
-		if (stat(fileName_.c_str(), &sbuf) < 0)		//这是干啥的
+		if (stat(fileName_.c_str(), &sbuf) < 0)		
 		{
 			header.clear();
 			handleError(fd_, 404, "Not Found!");
@@ -672,7 +650,7 @@ AnalysisState HttpData::analysisRequest()
 			return ANALYSIS_SUCCESS;
 
 
-		int src_fd = open(fileName_.c_str(), O_RDONLY, 0);//尝试打开文件
+		int src_fd = open(fileName_.c_str(), O_RDONLY, 0);
 		if (src_fd < 0)
 		{
 			outBuffer_.clear();
@@ -692,7 +670,7 @@ AnalysisState HttpData::analysisRequest()
 		char *src_addr = static_cast<char*>(mmapRet);
 		outBuffer_ += string(src_addr, src_addr + sbuf.st_size);;
 		munmap(mmapRet, sbuf.st_size);
-		return ANALYSIS_SUCCESS;				//这里不懂
+		return ANALYSIS_SUCCESS;			
 
 	}
 	return ANALYSIS_ERROR;
