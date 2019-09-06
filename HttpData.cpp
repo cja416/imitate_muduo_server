@@ -646,7 +646,7 @@ AnalysisState HttpData::analysisRequest()
 		{
 			header += "Content-Type: image/png\r\n";
 			header += "Content-Length: " + to_string(sizeof favicon) + "\r\n";
-			header += "Server: LinYa's Web Server\r\n";
+			header += "Server: Web Server\r\n";
 
 			header += "\r\n";
 			outBuffer_ += header;
@@ -663,7 +663,7 @@ AnalysisState HttpData::analysisRequest()
 		}
 		header += "Content-Type: " + filetype + "\r\n";
 		header += "Content-Length: " + to_string(sbuf.st_size) + "\r\n";
-		header += "Server: LinYa's Web Server\r\n";
+		header += "Server: Web Server\r\n";
 		// Í·²¿½áÊø
 		header += "\r\n";
 		outBuffer_ += header;

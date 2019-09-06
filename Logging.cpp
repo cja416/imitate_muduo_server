@@ -10,7 +10,7 @@
 static pthread_once_t once_control_ = PTHREAD_ONCE_INIT;
 static AsyncLogging* AsyncLogger_;		//静态同步对象指针
 
-std::string Logger::logFileName_= "/linya_WebServer.log";
+std::string Logger::logFileName_= "/webserver.log";
 
 void once_init() {
 	AsyncLogger_ = new AsyncLogging(Logger::getLogFileName());

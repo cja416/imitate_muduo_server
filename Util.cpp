@@ -8,8 +8,6 @@
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 
-//linux下正确程序是没有这一行的
-//typedef long long ssize_t;
 const int MAX_BUFF = 4096;
 ssize_t readn(int fd, void*buff, size_t n) {
 	size_t nleft = n;
