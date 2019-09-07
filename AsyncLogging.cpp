@@ -98,7 +98,7 @@ void AsyncLogging::threadFunc() {
 			assert(!buffersToWrite.empty());
 			newBuffer1 = buffersToWrite.back();
 			buffersToWrite.pop_back();
-			newBuffer1.reset();		//reset是将此对象的引用计数-1  ,若引用计数为0，则调用其析构函数
+			newBuffer1->reset();		//reset是将此对象的引用计数-1  ,若引用计数为0，则调用其析构函数
 		}
 
 		if (!newBuffer2)
