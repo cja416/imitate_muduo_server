@@ -147,7 +147,7 @@ void HttpData::reset() {
 	hState_ = H_START;
 	headers_.clear();
 	//keepAlive_ = false;
-	if (timer_.lock()) {		//是std::weak_ptr<TimerNode> timer_; 尝试提升  实际上这里可以调用seperateTimer
+	if (timer_.lock()) {		//是std::weak_ptr<TimerNode> timer_; 尝试提升
 		shared_ptr<TimerNode> my_timer(timer_.lock());
 		my_timer->clearReq();
 		timer_.reset();
@@ -303,9 +303,9 @@ void HttpData::handleConn() {
 			int timeout = DEFAULT_EXPIRED_TIME;
 			if (keepAlive_)
 				timeout = DEFAULT_KEEP_ALIVE_TIME;		//长连接时间
-			if ((events_ & EPOLLIN) && (events_ & EPOLLOUT)) {		//同时为输入事件和输出事件？？
+			if ((events_ & EPOLLIN) && (events_ & EPOLLOUT)) {
 				events_ = __uint32_t(0);
-				events_ |= EPOLLOUT;		//就只把它设置为输出事件,并修改对应channel的fd
+				events_ |= EPOLLOUT;		
 			}
 			//events_ |= (EPOLLET | EPOLLONESHOT);
 			events_ |= EPOLLET;
